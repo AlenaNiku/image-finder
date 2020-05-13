@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
-// import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
 import ImageResults from '../image-results/ImageResults';
@@ -21,18 +20,15 @@ class Search extends Component {
     this.setState({ searchValue: value }, () => {
       axios
         .get(
-          `${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=true`
+          `${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchValue}&image_type=photo&per_page=${this.state.amount}&safesearch=true`
         )
         .then((res) => this.setState({ images: res.data.hits }))
         .catch((err) => console.log(err));
     });
   };
 
-//   onAmountChange = (e, index, value) => this.setState({ amount: value });
 
-    onAmountChange = e => {
-        console.log(e.target)
-    }
+  onAmountChange = (e, index, value) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     console.log(this.state.images);
@@ -54,13 +50,13 @@ class Search extends Component {
           value={this.state.amount}
           onChange={this.onAmountChange}
         >
-          <MenuItem value={5}>5</MenuItem>
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={15}>15</MenuItem>
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={30}>30</MenuItem>   
         </Select>
         <br></br>
+
         {this.state.images.length > 0 ? (
           <ImageResults images={this.state.images} />
         ) : null}

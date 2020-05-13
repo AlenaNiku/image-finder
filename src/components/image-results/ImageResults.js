@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GridList, GridTile } from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import IconButton from "@material-ui/core/IconButton";
 import ZoomIn from 'material-ui/svg-icons/action/zoom-in';
-import Dialog from 'material-ui/Dialog';
+import Dialog from "@material-ui/core/Dialog";
 import FlatButton from 'material-ui/FlatButton';
 import { Grid } from '@material-ui/core';
 
@@ -17,7 +18,7 @@ class ImageResults extends Component {
           imageListContent = (
             <GridList cols={3}>
               {images.map((img) => (
-                <GridTile
+                <GridListTile
                   title={img.tags}
                   key={img.id}
                   subtitle={
@@ -34,7 +35,7 @@ class ImageResults extends Component {
                   }
                 >
                   <img src={img.largeImageURL} alt="" />
-                </GridTile>
+                </GridListTile>
               ))}
             </GridList>
           );
