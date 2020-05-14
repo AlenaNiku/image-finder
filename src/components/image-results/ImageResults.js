@@ -5,7 +5,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
-import { IconButton } from "@material-ui/core";
+import { IconButton, DialogActions } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 
 class ImageResults extends Component {
@@ -56,21 +56,22 @@ class ImageResults extends Component {
       imageListContent = null;
     }
 
-    const actions = [
-      <Button label="Close" primary={true} onClick={this.handleClose} />,
-    ];
-
     return (
         <div>
             {imageListContent}
              <Dialog
-                actions={actions}
+                onClose={this.handleClose}
                 modal={false}
                 open={this.state.open}
                 onRequestClose={this.handleClose}
              >
-            <img src={this.state.currentImg} alt="" style={{ width: '100%' }} />
-        </Dialog>
+                <img src={this.state.currentImg} alt="" style={{ width: '100%' }} />
+                <DialogActions>
+                    <Button onClick={this.handleClose} color="secondary" autoFocus>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
   }
